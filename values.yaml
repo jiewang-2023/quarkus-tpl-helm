@@ -4,7 +4,7 @@
 
 
 #副本数
-replicaCount: 1
+replicaCount: 2
 #应用名称
 application:
   name: quarkus-tpl
