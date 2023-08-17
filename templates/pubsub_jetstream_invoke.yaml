@@ -16,8 +16,8 @@ spec:
       value: {{ .Values.nats.jwt | quote}}
     - name: seedKey
       value: {{ .Values.nats.seedKey | quote}}
-#    - name: "deliverPolicy"
-#      value: all
+    - name: "deliverPolicy"
+      value: last
     - name: durableName
 #      k8s-quarkus-tpl-consumer
       value: "k8s-{{ .Values.application.name }}-consumer"
