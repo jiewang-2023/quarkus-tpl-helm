@@ -12,6 +12,8 @@ spec:
       value: {{ .Values.nats.jwt | quote}}
     - name: seedKey
       value: {{ .Values.nats.seedKey | quote}}
+    - name: "deliverPolicy"
+      value: all
     - name: durableName
       value: "k8s-{{ .Values.application.name }}-consumer"
     - name: queueGroupName
