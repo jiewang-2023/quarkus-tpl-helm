@@ -13,8 +13,8 @@ spec:
     - name: seedKey
       value: {{ .Values.nats.seedKey | quote}}
     - name: durableName
-      value: "invoke-{{ .Values.application.name }}-consumer"
-#    - name: queueGroupName
-#      value: "invoke-{{ .Values.application.name }}-consumer"
+      value: "k8s-{{ .Values.application.name }}-consumer"
+    - name: queueGroupName
+      value: "k8s-{{ .Values.application.name }}-queue"
 scopes:
   - {{ .Values.application.name }}
