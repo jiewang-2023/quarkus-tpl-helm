@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.application.name }}-config
+data:
+  QUARKUS_PROFILE: {{ .Values.env.QUARKUS_PROFILE | quote}}
+  TZ: {{ .Values.env.TZ | quote}}
+  DAPR_ENABLED: {{ .Values.env.DAPR_ENABLED | quote}}
+  QUARKUS_HTTP_PORT: {{ .Values.env.QUARKUS_HTTP_PORT | quote}}
+  DAPR_GRPC_PORT: {{ .Values.env.DAPR_GRPC_PORT | quote}}

@@ -1,0 +1,112 @@
+# Default values for quarkus-tpl.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+#副本数
+replicaCount: 2
+#应用名称
+application:
+  name: quarkus-tpl
+
+#dapr配置
+podAnnotations: {
+  "dapr.io/enabled": "true",
+  "dapr.io/app-id": "quarkus-tpl",
+  "dapr.io/app-port": "10000",
+  "dapr.io/log-level": "debug"
+}
+
+#环境变量配置
+env:
+  QUARKUS_PROFILE: "dev"
+  TZ: "Asia/Shanghai"
+  DAPR_ENABLED: "true"
+  QUARKUS_HTTP_PORT: "10000"
+  DAPR_GRPC_PORT: "50001"
+
+# service 配置
+service:
+  type: ClusterIP
+  port: 10000
+  host: quarkus-tpl-sz.dev.qhx.io
+
+#nats redis配置
+nats:
+  url: "nats://nats-sz.dev.qhx.io:4222"
+  jwt: "eyJ0eXAiOiJKV1QiLCJhbGciOiJlZDI1NTE5LW5rZXkifQ.eyJqdGkiOiIyQkNPR0FOVkVYNzRCWjUzRlBPNUVNVEkzUkFNUzdNUU1JUFdMNzM3UUg0NlhERzU3MllRIiwiaWF0IjoxNjc4OTM1NDQzLCJpc3MiOiJBQjZMWlM3WFdMNVc0RVpRM1pIMk5TQ1Y1RjRaRU1DWEFRNVJWN0k0V1pYMlJOQjNIV1pVUUxBUyIsIm5hbWUiOiJzZXJ2aWNlIiwic3ViIjoiVUNFR1BUQkJFQkI1TUhYWTJNN1pWUzVPSENDQzVWUks3VTVTNk8zS0pPQUdKVkpGUldGM1IyUkUiLCJuYXRzIjp7InB1YiI6e30sInN1YiI6e30sInN1YnMiOi0xLCJkYXRhIjotMSwicGF5bG9hZCI6LTEsInR5cGUiOiJ1c2VyIiwidmVyc2lvbiI6Mn19.Trwel9FEq3NR0pGYrh9ITdkwzeqPshShLNLRgbQodLxlPlUYt6g4PozG2Zc1_XdqXqAP8Q0W4ZR1KoPYrE-zBg"
+  seedKey: "SUAEMALCTHBAEJRCA76BJIV2FHCJG22KS57UYU24DQZHIXV42TYJAMTMYQ"
+redis:
+  url: "redis-sz.dev.qhx.io:6379"
+  password: "86259262"
+  actorStateStore: "true"
+
+#镜像秘钥
+imagePullSecrets:
+  - name: qhx-cd-pull-secret
+
+# 镜像地址
+image:
+  repository: cr.sz.qhx.io/qhx/quarkus_tpl/tbd/release:1.0.0-dev-dev-submodule.385202d.b8
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+#以下参数暂时用不到 忽略设置
+
+nameOverride: ""
+fullnameOverride: ""
+
+ingress:
+  enabled: false
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: { }
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+
+
+podSecurityContext: { }
+# fsGroup: 2000
+
+securityContext: { }
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+
+
+
+
+
+resources: { }
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+#   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: { }
+
+tolerations: [ ]
+
+affinity: { }

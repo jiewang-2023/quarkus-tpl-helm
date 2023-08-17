@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.application.name }}-deployment
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ .Values.application.name}}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ .Values.application.name }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "quarkus-tpl.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+{{/*  按容器定义顺序启动    */}}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: {{ .Values.image.repository | quote }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: QUARKUS_PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.application.name }}-config
+                  key: QUARKUS_PROFILE
+            - name: TZ
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.application.name }}-config
+                  key: TZ
+            - name: DAPR_ENABLED
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.application.name }}-config
+                  key: DAPR_ENABLED
+            - name: QUARKUS_HTTP_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.application.name }}-config
+                  key: QUARKUS_HTTP_PORT
+            - name: DAPR_GRPC_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Values.application.name }}-config
+                  key: DAPR_GRPC_PORT
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
