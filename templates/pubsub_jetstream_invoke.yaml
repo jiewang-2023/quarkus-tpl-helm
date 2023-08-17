@@ -6,6 +6,10 @@ spec:
   type: pubsub.jetstream
   version: v1
   metadata:
+    - name: name
+      value: "my-conn-name"
+    - name: streamName
+      value: "invoke-all"
     - name: natsURL
       value: {{ .Values.nats.url | quote}}
     - name: jwt
