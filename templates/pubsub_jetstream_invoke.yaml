@@ -15,10 +15,10 @@ spec:
     - name: "deliverPolicy"
       value: all
     - name: durableName
-#      value: "k8s-{{ .Values.application.name }}-consumer"
-      value: "quarkus-tpl-consumer"
+#      k8s-quarkus-tpl-consumer
+      value: "k8s-{{ .Values.application.name }}-consumer"
     - name: queueGroupName
-#      value: "k8s-{{ .Values.application.name }}-queue"
-      value: "myqueue"
+#      #      k8s-quarkus-tpl-queue
+      value: "k8s-{{ .Values.application.name }}-queue"
 scopes:
   - {{ .Values.application.name }}
