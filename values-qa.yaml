@@ -19,7 +19,7 @@ podAnnotations: {
 
 #环境变量配置
 env:
-  QUARKUS_PROFILE: "dev"
+  QUARKUS_PROFILE: "qa"
   TZ: "Asia/Shanghai"
   DAPR_ENABLED: "true"
   QUARKUS_HTTP_PORT: "10000"
@@ -29,7 +29,7 @@ env:
 service:
   type: ClusterIP
   port: 10000
-  host: quarkus-tpl-sz.dev.qhx.io
+  host: quarkus-tpl-sz.qa.qhx.io
 
 #nats redis配置
 nats:
