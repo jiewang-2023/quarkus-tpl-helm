@@ -1,10 +1,77 @@
+#self
 apiVersion: dapr.io/v1alpha1
 kind: Subscription
 metadata:
-  name: {{ .Values.application.name }}-sub
+  name: {{ .Values.application.name }}-consumer
 spec:
-  topic: invoke.>
-  route: /dapr/subscribe/callback/service_invoke
-  pubsubname: {{ .Values.application.name }}-pubsub-jetstream-invoke
-scopes:
-  - {{ .Values.application.name }}
+  topic: invoke.request.pos.>
+  route: /dapr/subscribe/callback/service-invoke
+  pubsubname: {{ .Values.application.name }}-consumer
+---
+
+
+#pay
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .Values.application.name }}-consumer-pay
+spec:
+  topic: invoke.response.pay.>
+  route: /dapr/subscribe/callback/service-invoke
+  pubsubname: {{ .Values.application.name }}-consumer-pay
+---
+
+#marketing
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .Values.application.name }}-consumer-marketing
+spec:
+  topic: invoke.response.marketing.>
+  route: /dapr/subscribe/callback/service-invoke
+  pubsubname: {{ .Values.application.name }}-consumer-marketing
+---
+
+#notify
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .Values.application.name }}-consumer-notify
+spec:
+  topic: invoke.response.notify.>
+  route: /dapr/subscribe/callback/service-invoke
+  pubsubname: {{ .Values.application.name }}-consumer-notify
+---
+
+#iam
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .Values.application.name }}-consumer-iam
+spec:
+  topic: invoke.response.iam.>
+  route: /dapr/subscribe/callback/service-invoke
+  pubsubname: {{ .Values.application.name }}-consumer-iam
+---
+
+#mission
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .Values.application.name }}-consumer-mission
+spec:
+  topic: invoke.response.mission.>
+  route: /dapr/subscribe/callback/service-invoke
+  pubsubname: {{ .Values.application.name }}-consumer-mission
+---
+
+#finance
+apiVersion: dapr.io/v1alpha1
+kind: Subscription
+metadata:
+  name: {{ .Values.application.name }}-consumer-finance
+spec:
+  topic: invoke.response.finance.>
+  route: /dapr/subscribe/callback/service-invoke
+  pubsubname: {{ .Values.application.name }}-consumer-finance
+---

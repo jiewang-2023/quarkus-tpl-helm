@@ -12,5 +12,3 @@ spec:
       value: {{ .Values.nats.jwt | quote}}
     - name: seedKey
       value: {{ .Values.nats.seedKey | quote}}
-scopes:
-  - {{ .Values.application.name }}

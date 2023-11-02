@@ -1,13 +1,15 @@
+#self
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: {{ .Values.application.name }}-pubsub-jetstream-invoke
+  name: {{ .Values.application.name }}-consumer
+  namespace: default
 spec:
   type: pubsub.jetstream
   version: v1
   metadata:
     - name: name
-      value: "my-conn-name"
+      value: {{{{ .Values.application.name }}-consumer | quote}}
     - name: streamName
       value: "invoke-all"
     - name: natsURL
@@ -19,10 +21,146 @@ spec:
     - name: "deliverPolicy"
       value: all
     - name: durableName
-#      k8s-quarkus-tpl-consumer
       value: "k8s-{{ .Values.application.name }}-consumer"
     - name: queueGroupName
-#      #      k8s-quarkus-tpl-queue
       value: "k8s-{{ .Values.application.name }}-queue"
-scopes:
-  - {{ .Values.application.name }}
+---
+
+#pay
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: {{ .Values.application.name }}-consumer-pay
+  namespace: default
+spec:
+  type: pubsub.jetstream
+  version: v1
+  metadata:
+    - name: name
+      value: {{{{ .Values.application.name }}-consumer | quote}}
+    - name: streamName
+      value: "invoke-all"
+    - name: natsURL
+      value: {{ .Values.nats.url | quote}}
+    - name: jwt
+      value: {{ .Values.nats.jwt | quote}}
+    - name: seedKey
+      value: {{ .Values.nats.seedKey | quote}}
+    - name: "deliverPolicy"
+      value: all
+    - name: durableName
+      value: "k8s-{{ .Values.application.name }}-consumer-pay"
+    - name: queueGroupName
+      value: "k8s-{{ .Values.application.name }}-pay-queue"
+---
+
+#marketing
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: {{ .Values.application.name }}-consumer-marketing
+  namespace: default
+spec:
+  type: pubsub.jetstream
+  version: v1
+  metadata:
+    - name: name
+      value: {{{{ .Values.application.name }}-consumer | quote}}
+    - name: streamName
+      value: "invoke-all"
+    - name: natsURL
+      value: {{ .Values.nats.url | quote}}
+    - name: jwt
+      value: {{ .Values.nats.jwt | quote}}
+    - name: seedKey
+      value: {{ .Values.nats.seedKey | quote}}
+    - name: "deliverPolicy"
+      value: all
+    - name: durableName
+      value: "k8s-{{ .Values.application.name }}-consumer-marketing"
+    - name: queueGroupName
+      value: "k8s-{{ .Values.application.name }}-marketing-queue"
+---
+
+#iam
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: {{ .Values.application.name }}-consumer-iam
+  namespace: default
+spec:
+  type: pubsub.jetstream
+  version: v1
+  metadata:
+    - name: name
+      value: {{{{ .Values.application.name }}-consumer | quote}}
+    - name: streamName
+      value: "invoke-all"
+    - name: natsURL
+      value: {{ .Values.nats.url | quote}}
+    - name: jwt
+      value: {{ .Values.nats.jwt | quote}}
+    - name: seedKey
+      value: {{ .Values.nats.seedKey | quote}}
+    - name: "deliverPolicy"
+      value: all
+    - name: durableName
+      value: "k8s-{{ .Values.application.name }}-consumer-iam"
+    - name: queueGroupName
+      value: "k8s-{{ .Values.application.name }}-iam-queue"
+---
+
+#mission
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: {{ .Values.application.name }}-consumer-mission
+  namespace: default
+spec:
+  type: pubsub.jetstream
+  version: v1
+  metadata:
+    - name: name
+      value: {{{{ .Values.application.name }}-consumer | quote}}
+    - name: streamName
+      value: "invoke-all"
+    - name: natsURL
+      value: {{ .Values.nats.url | quote}}
+    - name: jwt
+      value: {{ .Values.nats.jwt | quote}}
+    - name: seedKey
+      value: {{ .Values.nats.seedKey | quote}}
+    - name: "deliverPolicy"
+      value: all
+    - name: durableName
+      value: "k8s-{{ .Values.application.name }}-consumer-mission"
+    - name: queueGroupName
+      value: "k8s-{{ .Values.application.name }}-mission-queue"
+---
+
+#finance
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: {{ .Values.application.name }}-consumer-finance
+  namespace: default
+spec:
+  type: pubsub.jetstream
+  version: v1
+  metadata:
+    - name: name
+      value: {{{{ .Values.application.name }}-consumer | quote}}
+    - name: streamName
+      value: "invoke-all"
+    - name: natsURL
+      value: {{ .Values.nats.url | quote}}
+    - name: jwt
+      value: {{ .Values.nats.jwt | quote}}
+    - name: seedKey
+      value: {{ .Values.nats.seedKey | quote}}
+    - name: "deliverPolicy"
+      value: all
+    - name: durableName
+      value: "k8s-{{ .Values.application.name }}-consumer-finance"
+    - name: queueGroupName
+      value: "k8s-{{ .Values.application.name }}-finance-queue"

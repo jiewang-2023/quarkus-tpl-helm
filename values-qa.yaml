@@ -1,4 +1,4 @@
-# Default values for quarkus-tpl.
+# Default values for pos.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -7,12 +7,12 @@
 replicaCount: 1
 #应用名称
 application:
-  name: quarkus-tpl
+  name: pos
 
 #dapr配置
 podAnnotations: {
   "dapr.io/enabled": "true",
-  "dapr.io/app-id": "quarkus-tpl",
+  "dapr.io/app-id": "pos",
   "dapr.io/app-port": "10000",
   "dapr.io/log-level": "info"
 }
@@ -29,7 +29,7 @@ env:
 service:
   type: ClusterIP
   port: 10000
-  host: quarkus-tpl-sz.qa.qhx.io
+  host: pos-sz.qa.qhx.io
 
 #nats redis配置
 nats:
@@ -79,7 +79,7 @@ securityContext: { }
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
+# runAsNonRoot: true
 # runAsUser: 1000
 
 
@@ -95,7 +95,7 @@ resources: { }
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
-  #   cpu: 100m
+#   cpu: 100m
 #   memory: 128Mi
 
 autoscaling:
