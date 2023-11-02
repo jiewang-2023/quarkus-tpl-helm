@@ -9,7 +9,7 @@ spec:
   version: v1
   metadata:
     - name: name
-      value: {{{{ .Values.application.name }}-consumer | quote}}
+      value: "{{ .Values.application.name }}-consumer"
     - name: streamName
       value: "invoke-all"
     - name: natsURL
@@ -37,7 +37,7 @@ spec:
   version: v1
   metadata:
     - name: name
-      value: {{{{ .Values.application.name }}-consumer | quote}}
+      value: "{{ .Values.application.name }}-consumer-pay"
     - name: streamName
       value: "invoke-all"
     - name: natsURL
@@ -65,7 +65,7 @@ spec:
   version: v1
   metadata:
     - name: name
-      value: {{{{ .Values.application.name }}-consumer | quote}}
+      value: "{{ .Values.application.name }}-consumer-marketing"
     - name: streamName
       value: "invoke-all"
     - name: natsURL
@@ -93,7 +93,7 @@ spec:
   version: v1
   metadata:
     - name: name
-      value: {{{{ .Values.application.name }}-consumer | quote}}
+      value: "{{ .Values.application.name }}-consumer-iam"
     - name: streamName
       value: "invoke-all"
     - name: natsURL
@@ -121,7 +121,7 @@ spec:
   version: v1
   metadata:
     - name: name
-      value: {{{{ .Values.application.name }}-consumer | quote}}
+      value: "{{ .Values.application.name }}-consumer-mission"
     - name: streamName
       value: "invoke-all"
     - name: natsURL
@@ -149,7 +149,7 @@ spec:
   version: v1
   metadata:
     - name: name
-      value: {{{{ .Values.application.name }}-consumer | quote}}
+      value: "{{ .Values.application.name }}-consumer-finance"
     - name: streamName
       value: "invoke-all"
     - name: natsURL
